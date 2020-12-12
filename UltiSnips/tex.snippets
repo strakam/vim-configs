@@ -1,0 +1,95 @@
+snippet skeleton "Skeleton of a Latex file"
+\documentclass{article} 
+\usepackage[utf8]{inputenc}
+\usepackage[slovak]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{graphicx}
+\usepackage[margin=3cm,
+	top=1.5cm,
+	includeheadfoot,
+	footskip=30pt,
+	bottom = 50pt,
+	headheight=50pt]{geometry}
+% Header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\textbf{Matej Straka} \\\\ Matematicko-fyzikální fakulta - UK}
+\rhead{\textbf{$1} \\\\ $2}
+\begin{document}
+\noindent
+
+\end{document}
+endsnippet
+
+snippet be "Insert Begin tag" i
+\begin{$1}
+
+\end{$1}
+endsnippet
+
+snippet dp "Double big P" i
+ℙ
+endsnippet
+snippet beq "Insert equation" i
+\begin{equation*}
+$1
+\end{equation*}
+endsnippet
+
+snippet bei "Insert itemize" i
+\begin{itemize}
+$1
+\end{itemize}
+endsnippet
+
+snippet beg "Insert gather" i
+\begin{gather*}
+$1
+\end{gather*}
+endsnippet
+
+snippet bee "Insert itemize" i
+\begin{enumerate}
+$1
+\end{enumerate}
+endsnippet
+
+snippet sks "Skalarny sucin template"
+\langle $1 \rangle
+endsnippet
+
+snippet sqrt "odmocnina"
+\sqrt{$1}
+endsnippet
+
+snippet limni "limita n do nekonecna"
+\lim_{n\rightarrow\infty}
+endsnippet
+
+snippet par "parcialna derivacia"
+\frac{\partial}{\partial $1}
+endsnippet
+
+snippet sec "section"
+\section*{$1}$2
+endsnippet
+
+snippet fr "fraction"
+\frac{$1}{$2}$3
+endsnippet
+
+snippet bpm "create ( ) matrix"
+\begin{pmatrix}
+$1
+\end{pmatrix}
+endsnippet
+
+snippet tbf "bold text"
+\textbf{$1}$2
+endsnippet
+
+snippet tit "italic text"
+\textit{$1}$2
+endsnippet
