@@ -36,6 +36,7 @@ function! DeadKeys()
 	imap <buffer> 'Y Ý
 	imap <buffer> '<space> '
 
+    imap <buffer> [e ě
 	imap <buffer> [t ť
 	imap <buffer> [T Ť
 	imap <buffer> [s š

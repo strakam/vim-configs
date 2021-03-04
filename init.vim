@@ -1,8 +1,8 @@
+"{{{ Basics
 " General filetype plugin on
 let mapleader=','
 let localleader=','
 
-set termguicolors
 set number			" Show line numbers
 set linebreak		" Break lines at word (requires Wrap lines)
 set textwidth=80	" Line wrap (number of cols)
@@ -14,6 +14,8 @@ set hlsearch		" Highlight all search results
 set smartcase		" Enable smart-case search
 set ignorecase		" Always case-insensitive
 set incsearch		" Searches for strings incrementally
+set foldmethod=indent " Braces to fold
+set noswapfile
 
 
 " Indentation 
@@ -25,16 +27,21 @@ set autoindent
 set smartindent
 " Advanced
 set ruler		"Show row and column ruler information
- 
+"}}}
+"{{{ Plug
 call plug#begin('~/.config/nvim/plugged')
 	" Plug 'neoclide/coc-references'
     Plug 'itchyny/lightline.vim'
+    " Window management
     Plug 'spolu/dwm.vim'
     "Linting and completion
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'dense-analysis/ale'
+    " Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    " Plug 'dense-analysis/ale'
+    Plug 'neovim/nvim-lspconfig'
     Plug 'lervag/vimtex'
     Plug 'SirVer/ultisnips'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     "Themes
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'christianchiarulli/nvcode-color-schemes.vim'
@@ -48,31 +55,57 @@ call plug#begin('~/.config/nvim/plugged')
     "Startup
     Plug 'mhinz/vim-startify'
     " Which
-    Plug 'liuchengxu/vim-which-key'
 call plug#end()
+"}}}
+"{{{ Small bindings
+" Custom keybindings for SK chars
+autocmd FileType * so ~/.vim/deadkeys.vim
+nnoremap <Leader>d :call ToggleDeadKeys()<CR>
+inoremap <Leader>d <ESC>:call ToggleDeadKeys()<CR>a
 
+"FZF
+nnoremap <Leader><Leader>f :Files ~<CR>
+command! -bang -nargs=? -complete=dir Files call fzf#vim#files('~', <bang>0)
 
-"Python virtualenv
-let g:python3_host_prog='/usr/bin/python3'
-"---------------------------Latex settings--------------------------------
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-"---------------------------Custom keymaps--------------------------------
-" LF floating
+" Folds
+nnoremap <Space>f za
+
+" Floaterm
 command! LF FloatermNew lf
 nnoremap <leader>r :LF<cr>
+
+nnoremap <leader>t :FloatermNew<cr>
+nnoremap <leader>st :FloatermShow<cr>
+nnoremap <leader>nt :FloatermNext<cr>
+
+autocmd Filetype cpp nnoremap <F5> :FloatermNew --autoclose=0 g++ % -o %< && ./%<<cr>
+
 " Copy paste
 noremap <leader>y "+y
 noremap <leader>p "+p
+
+
+" Brackets
+inoremap {<CR> {<CR>}<ESC>O
+
 "UltiSnips
 let g:UltiSnipsExpandTrigger="<c-l>"
 nnoremap :use :UltiSnipsEdit<CR>
+
 "Source"
 nnoremap <leader>s :so $MYVIMRC<CR>:call lightline#update()<CR>
+
 "No highlight"
 nnoremap <leader><Space> :noh<CR>
-"Window management"
+
+"Tabularize"
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a- :Tabularize -=<CR>
+vmap <Leader>a- :Tabularize -=<CR>
+"}}}
+"{{{ Window management settings and bindings
+" DWM 
 nmap [r <Plug>DWMRotateCounterclockwise
 nmap ]r <Plug>DWMRotateClockwise
 augroup vimrc
@@ -86,13 +119,6 @@ nmap ]h <C-w>-
 nmap <C-;> gt
 nnoremap <Up> :resize +1<CR>
 nnoremap <Down> :resize -1<CR>
-
-"WhichKey
-nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
-nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
-
-"Brackets"
-inoremap {<CR> {<CR>}<ESC>O
 
 " Terminal bindings
 tnoremap <C-h> <c-\><c-n><c-w>h
@@ -110,27 +136,23 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR> 
 nnoremap <silent> [n :next<CR> 
 nnoremap <silent> ]n :prev<CR> 
-
-"Tabularize"
-nmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-nmap <Leader>a- :Tabularize -=<CR>
-vmap <Leader>a- :Tabularize -=<CR>
-"Debug"
+"}}}
+"{{{ Debug
 autocmd Filetype cpp packadd termdebug
 let g:termdebug_popup = 0
 let g:termdebug_wide = 163
-autocmd Filetype cpp map <Leader><Leader>td :Termdebug <c-r>=getcwd()<CR>/%:r.out<CR>
-autocmd Filetype cpp map <Leader><Leader>dc :!g++ -g -o  %:r.out % -std=c++14<CR>
+autocmd Filetype cpp map <Leader><Leader>c :! g++ -std=c++17 -g % -o %:r.out<CR>
+autocmd Filetype cpp map <Leader><Leader>d :! g++ -std=c++17 -g % -o %:r.out<CR>:Termdebug <c-r>=getcwd()<CR>/%:r.out<CR>
 autocmd Filetype cpp map \r :Run<CR>
-autocmd Filetype cpp map n :Over<CR>
+autocmd Filetype cpp map \n :Over<CR>
 autocmd Filetype cpp map s :Step<CR>
 autocmd Filetype cpp map C :Continue<CR>
 autocmd Filetype cpp map b :Break<CR>
-autocmd Filetype cpp map c :Clear<CR>
+autocmd Filetype cpp map \c :Clear<CR>
 autocmd Filetype cpp map \f :Finish<CR>
 autocmd Filetype cpp map \S :Stop<CR>
-
+"}}}
+"{{{ Colors
 " configure treesitter
 lua require('treesitter')
 
@@ -146,17 +168,35 @@ if (has("termguicolors"))
     set termguicolors
     hi LineNr ctermbg=NONE guibg=NONE
 endif
+"}}}
+"{{{ Startify
+let g:startify_session_dir = '~/.config/nvim/session'
+let g:startify_files_number = 6
+nnoremap <Leader>S :Startify<cr>
+let g:startify_lists = [
+    \ { 'type': 'sessions',  'header': ['Sessions']       },
+    \ { 'type': 'bookmarks', 'header': ['Bookmarks']      },
+    \ { 'type': 'files',     'header': ['Recent files']            },
+    \ { 'type': 'dir',       'header': ['Current Directory '. getcwd()] },
+    \ ]
 
-" Custom keybindings for SK chars
-autocmd FileType * so ~/.vim/deadkeys.vim
-nnoremap <Leader><Leader>d :call ToggleDeadKeys()<CR>
-inoremap <Leader><Leader>d <ESC>:call ToggleDeadKeys()<CR>a
-
-"---------------------------Ale Settings----------------------------------
+let g:startify_bookmarks = [
+    \ { 'i': '~/.config/nvim/init.vim' },
+    \ { 'm': '~/Skola/CPP/main.cpp' },
+    \ ]
+"}}}
+"{{{ Languages and ALE
+"Python virtualenv
+let g:python3_host_prog='/usr/bin/python3'
+" Latex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+" ALE
 let g:ale_sign_error   = '>>'
 let g:ale_sign_warning = '->'
-
-"---------------------------Coc Settings----------------------------------
+"}}}
+"{{{ Conquer of Completion
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -299,3 +339,4 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>s
+"}}}

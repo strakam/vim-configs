@@ -4,8 +4,12 @@ snippet skeleton "Skeleton of a Latex file"
 \usepackage[slovak]{babel}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{dsfont}
 \usepackage{graphicx}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 \usepackage[margin=3cm,
 	top=1.5cm,
 	includeheadfoot,
@@ -78,6 +82,18 @@ endsnippet
 
 snippet fr "fraction"
 \frac{$1}{$2}$3
+endsnippet
+
+snippet real "real"
+\mathbb{R}
+endsnippet
+
+snippet fa "for all"
+\forall 
+endsnippet
+
+snippet ex "exists"
+\exists 
 endsnippet
 
 snippet bpm "create ( ) matrix"
