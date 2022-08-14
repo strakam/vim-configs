@@ -47,7 +47,7 @@ return packer.startup(function(use)
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used by plugins
 
     -- Completion
-    use {"hrsh7th/nvim-cmp", config = [[require'plugins.cmp']]} -- The completion plugin
+    use {"hrsh7th/nvim-cmp", config = [[require'cfg.cmp']]} -- The completion plugin
     use "hrsh7th/cmp-nvim-lsp" -- Actual completions from LSP
     use {"hrsh7th/cmp-buffer", after="nvim-cmp"} -- Buffer completions
     use {"hrsh7th/cmp-path", after="nvim-cmp"} -- Path completions

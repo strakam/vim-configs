@@ -104,8 +104,8 @@ _G.packer_plugins = {
     url = "https://github.com/hrsh7th/cmp-path"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-path", "cmp-buffer", "cmp-cmdline" },
-    config = { "require'plugins.cmp'" },
+    after = { "cmp-cmdline", "cmp-path", "cmp-buffer" },
+    config = { "require'cfg.cmp'" },
     loaded = true,
     only_config = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-cmp",
@@ -141,13 +141,13 @@ _G.packer_plugins = {
 time([[Defining packer_plugins]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
-require'plugins.cmp'
+require'cfg.cmp'
 time([[Config for nvim-cmp]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-cmdline ]]
-vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-path ]]
+vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-cmdline ]]
 time([[Sequenced loading]], false)
 if should_profile then save_profiles() end
 
