@@ -42,6 +42,7 @@ packer.init({
 return packer.startup(function(use)
 	-- My plugins here
 
+    -- Packer stuff
 	use "wbthomason/packer.nvim" -- Packager itself
     use "nvim-lua/popup.nvim" -- An implementation of the Popup API
 	use "nvim-lua/plenary.nvim" -- Useful lua functions used by plugins
@@ -57,6 +58,12 @@ return packer.startup(function(use)
     -- LSP
     use "neovim/nvim-lspconfig" -- Enable LSP
     use "williamboman/nvim-lsp-installer" -- Easify lang server installs
+
+    -- Toggleterm
+    use "akinsho/toggleterm.nvim"
+
+    -- Lualine
+    use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

@@ -103,8 +103,13 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/opt/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
   ["nvim-cmp"] = {
-    after = { "cmp-cmdline", "cmp-path", "cmp-buffer" },
+    after = { "cmp-buffer", "cmp-path", "cmp-cmdline" },
     config = { "require'cfg.cmp'" },
     loaded = true,
     only_config = true,
@@ -121,6 +126,11 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/kyazdani42/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -135,6 +145,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
   }
 }
 
@@ -145,9 +160,9 @@ require'cfg.cmp'
 time([[Config for nvim-cmp]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-cmdline ]]
+vim.cmd [[ packadd cmp-path ]]
 time([[Sequenced loading]], false)
 if should_profile then save_profiles() end
 

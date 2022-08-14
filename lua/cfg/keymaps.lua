@@ -5,7 +5,7 @@ local term_opts = { silent = true }
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Remap space as leader key
+--Remap colon as leader key
 keymap("", ",", "<Nop>", opts)
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
@@ -41,9 +41,17 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Source
 keymap("n", "<leader>s", ":so $MYVIMRC<CR>", opts)
+keymap("n", "<leader>k", ":echo 'kek'<CR>", opts)
 
 -- Folds
 keymap("n", "<Space>f", "za", opts)
+
+-- Copy Paste
+keymap("n", "<leader>y", '\"+y', opts)
+keymap("n", "<leader>p", '\"+p', opts)
+
+-- Disable highlighting
+keymap('n', '<leader><Space>', ':noh<CR>', opts)
 
 -- Insert --
 -- Press jk fast to exit insert mode 
