@@ -59,11 +59,27 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig" -- Enable LSP
     use "williamboman/nvim-lsp-installer" -- Easify lang server installs
 
+    -- Treesitter
+    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate",}
+
     -- Toggleterm
     use "akinsho/toggleterm.nvim"
 
+    -- Commentary
+    use { 'numToStr/Comment.nvim', config = require('Comment').setup()}
+
     -- Lualine
     use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
+
+    -- Colorschemes
+    use 'christianchiarulli/nvcode-color-schemes.vim'
+
+    -- Latex
+    use 'lervag/vimtex'
+
+    -- use 'tpope/vim-surround'
+    -- use 'tpope/vim-repeat'
+
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins
 	if PACKER_BOOTSTRAP then

@@ -1,0 +1,8 @@
+require 'cfg.options'
+require 'plugins'
+require 'cfg.treesitter'
+require 'lsp'
+require 'cfg.keymaps'
+require 'cfg.colorscheme'
+require 'cfg.lualine'
+require 'cfg.toggleterm'

@@ -41,7 +41,7 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Source
 keymap("n", "<leader>s", ":so $MYVIMRC<CR>", opts)
-keymap("n", "<leader>k", ":echo 'kek'<CR>", opts)
+keymap("n", "<leader>d", ":call ToggleDeadKeys()<CR>", opts)
 
 -- Folds
 keymap("n", "<Space>f", "za", opts)
@@ -56,6 +56,9 @@ keymap('n', '<leader><Space>', ':noh<CR>', opts)
 -- Insert --
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
+
+
+keymap("i", "<leader>d", "<ESC>:call ToggleDeadKeys()<CR>a", opts)
 
 -- Visual --
 -- Stay in indent mode

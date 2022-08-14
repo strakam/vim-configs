@@ -69,6 +69,33 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["Comment.nvim"] = {
+    config = {
+      extra = {
+        above = "gcO",
+        below = "gco",
+        eol = "gcA"
+      },
+      mappings = {
+        basic = true,
+        extended = false,
+        extra = true
+      },
+      opleader = {
+        block = "gb",
+        line = "gc"
+      },
+      padding = true,
+      sticky = true,
+      toggler = {
+        block = "gbc",
+        line = "gcc"
+      }
+    },
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/Comment.nvim",
+    url = "https://github.com/numToStr/Comment.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/LuaSnip",
@@ -108,6 +135,11 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
+  ["nvcode-color-schemes.vim"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/nvcode-color-schemes.vim",
+    url = "https://github.com/christianchiarulli/nvcode-color-schemes.vim"
+  },
   ["nvim-cmp"] = {
     after = { "cmp-buffer", "cmp-path", "cmp-cmdline" },
     config = { "require'cfg.cmp'" },
@@ -125,6 +157,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-treesitter"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -150,6 +187,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 
@@ -158,11 +200,14 @@ time([[Defining packer_plugins]], false)
 time([[Config for nvim-cmp]], true)
 require'cfg.cmp'
 time([[Config for nvim-cmp]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+time([[Config for Comment.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
+vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-cmdline ]]
-vim.cmd [[ packadd cmp-path ]]
 time([[Sequenced loading]], false)
 if should_profile then save_profiles() end
 

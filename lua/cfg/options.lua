@@ -42,11 +42,23 @@ local options = {
   colorcolumn = '100',
 }
 
-vim.opt.shortmess:append "c"
-
 for k, v in pairs(options) do
   vim.opt[k] = v
 end
+
+vim.opt.shortmess:append "c"
+
+-- Virtualenv
+vim.g.python3_host_prog = '/usr/bin/python3'
+
+-- Vimtex
+vim.g.tex_flavor='latex'
+-- vim.g.vimtex_view_method='zathura'
+vim.g.vimtex_quickfix_mode=0
+
+-- Custom keybindings 
+vim.cmd('autocmd FileType * so ~/.config/nvim/deadkeys.vim')
+
 
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
