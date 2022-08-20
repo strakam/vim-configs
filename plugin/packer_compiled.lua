@@ -101,6 +101,11 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["barbar.nvim"] = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/barbar.nvim",
+    url = "https://github.com/romgrk/barbar.nvim"
+  },
   ["cmp-buffer"] = {
     after_files = { "/home/m/.local/share/nvim/site/pack/packer/opt/cmp-buffer/after/plugin/cmp_buffer.lua" },
     load_after = {},
@@ -130,6 +135,11 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/opt/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  firenvim = {
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/firenvim",
+    url = "https://github.com/glacambre/firenvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/lualine.nvim",
@@ -141,7 +151,7 @@ _G.packer_plugins = {
     url = "https://github.com/christianchiarulli/nvcode-color-schemes.vim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-buffer", "cmp-path", "cmp-cmdline" },
+    after = { "cmp-path", "cmp-cmdline", "cmp-buffer" },
     config = { "require'cfg.cmp'" },
     loaded = true,
     only_config = true,
@@ -183,6 +193,22 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["telescope-fzf-native.nvim"] = {
+    after = { "telescope.nvim" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/m/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
+  ["telescope.nvim"] = {
+    config = { "require('cfg.telescope')" },
+    load_after = {},
+    loaded = true,
+    needs_bufread = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
   ["toggleterm.nvim"] = {
     loaded = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
@@ -196,18 +222,25 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+time([[Config for Comment.nvim]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require'cfg.cmp'
 time([[Config for nvim-cmp]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-time([[Config for Comment.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-path ]]
 vim.cmd [[ packadd cmp-buffer ]]
 vim.cmd [[ packadd cmp-cmdline ]]
+vim.cmd [[ packadd cmp-path ]]
+vim.cmd [[ packadd plenary.nvim ]]
+vim.cmd [[ packadd telescope-fzf-native.nvim ]]
+vim.cmd [[ packadd telescope.nvim ]]
+
+-- Config for: telescope.nvim
+require('cfg.telescope')
+
 time([[Sequenced loading]], false)
 if should_profile then save_profiles() end
 

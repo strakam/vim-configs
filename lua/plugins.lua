@@ -59,6 +59,11 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig" -- Enable LSP
     use "williamboman/nvim-lsp-installer" -- Easify lang server installs
 
+    -- Telescope
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make', after = 'plenary.nvim'}
+    use {'nvim-telescope/telescope.nvim', config="require('cfg.telescope')", 
+        after= 'telescope-fzf-native.nvim' }
+
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate",}
 
@@ -66,10 +71,18 @@ return packer.startup(function(use)
     use "akinsho/toggleterm.nvim"
 
     -- Commentary
-    use { 'numToStr/Comment.nvim', config = require('Comment').setup()}
+    use {'numToStr/Comment.nvim', config = require('Comment').setup()}
 
-    -- Lualine
+    -- Firenvim
+    use {'glacambre/firenvim', run = function() vim.fn['firenvim#install'](0) end}
+
+    -- Lualine & Barbar
     use {'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true }}
+    use {
+        'romgrk/barbar.nvim',
+        requires = {'kyazdani42/nvim-web-devicons'}
+    }
+
 
     -- Colorschemes
     use 'christianchiarulli/nvcode-color-schemes.vim'

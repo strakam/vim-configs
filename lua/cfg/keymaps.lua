@@ -3,12 +3,12 @@ local opts = { noremap = true, silent = true }
 local term_opts = { silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap.set
 
 --Remap colon as leader key
-keymap("", ",", "<Nop>", opts)
-vim.g.mapleader = ","
-vim.g.maplocalleader = ","
+keymap("", " ", "<Nop>", opts)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -53,6 +53,19 @@ keymap("n", "<leader>p", '\"+p', opts)
 -- Disable highlighting
 keymap('n', '<leader><Space>', ':noh<CR>', opts)
 
+-- Telescope
+keymap('n', '<leader>f', function() require("telescope.builtin").find_files { } end, opts)
+keymap('n', '<leader>l', function() require("telescope.builtin").live_grep { } end, opts)
+keymap('n', '<leader>h', function() require("telescope.builtin").command_history { } end, opts)
+keymap('n', '<leader>H', function() require("telescope.builtin").help_tags { } end, opts)
+keymap('n', '<leader>B', function() require("telescope.builtin").builtin { } end, opts)
+keymap('n', '<leader>M', function() require("telescope.builtin").man_pages { } end, opts)
+keymap('n', '<leader>m', function() require("telescope.builtin").keymaps { } end, opts)
+keymap('n', 'gd', function() require("telescope.builtin").lsp_definitions { } end, opts)
+keymap('n', 'gr', function() require("telescope.builtin").lsp_references { } end, opts)
+
+
+keymap('n', '<leader>t', ':ToggleTerm<CR>', opts)
 -- Insert --
 -- Press jk fast to exit insert mode 
 keymap("i", "jk", "<ESC>", opts)
