@@ -40,6 +40,7 @@ local options = {
   guifont = "monospace:h17",               -- the font used in graphical neovim applications
   textwidth = 100,
   colorcolumn = '100',
+  autochdir = true,
 }
 
 for k, v in pairs(options) do

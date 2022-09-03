@@ -21,7 +21,7 @@ M.setup = function()
       active = signs,
     },
     update_in_insert = true,
-    underline = true,
+    underline = false,
     severity_sort = true,
     float = {
       focusable = false,
@@ -100,5 +100,19 @@ if not status_ok then
 end
 
 M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+      scope = 'cursor',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
 
 return M

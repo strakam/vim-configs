@@ -151,12 +151,18 @@ _G.packer_plugins = {
     url = "https://github.com/christianchiarulli/nvcode-color-schemes.vim"
   },
   ["nvim-cmp"] = {
-    after = { "cmp-path", "cmp-cmdline", "cmp-buffer" },
+    after = { "cmp-buffer", "cmp-cmdline", "cmp-path" },
     config = { "require'cfg.cmp'" },
     loaded = true,
     only_config = true,
     path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-colorizer.lua"] = {
+    config = { "require'colorizer'.setup()" },
+    loaded = true,
+    path = "/home/m/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
+    url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
   ["nvim-lsp-installer"] = {
     loaded = true,
@@ -193,6 +199,13 @@ _G.packer_plugins = {
     path = "/home/m/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["rasi.vim"] = {
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/home/m/.local/share/nvim/site/pack/packer/opt/rasi.vim",
+    url = "https://github.com/Fymyte/rasi.vim"
+  },
   ["telescope-fzf-native.nvim"] = {
     after = { "telescope.nvim" },
     load_after = {},
@@ -222,13 +235,17 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-time([[Config for Comment.nvim]], false)
+-- Config for: nvim-colorizer.lua
+time([[Config for nvim-colorizer.lua]], true)
+require'colorizer'.setup()
+time([[Config for nvim-colorizer.lua]], false)
 -- Config for: nvim-cmp
 time([[Config for nvim-cmp]], true)
 require'cfg.cmp'
 time([[Config for nvim-cmp]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+time([[Config for Comment.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
 vim.cmd [[ packadd cmp-buffer ]]
@@ -242,6 +259,18 @@ vim.cmd [[ packadd telescope.nvim ]]
 require('cfg.telescope')
 
 time([[Sequenced loading]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Filetype lazy-loads
+time([[Defining lazy-load filetype autocommands]], true)
+vim.cmd [[au FileType rasi ++once lua require("packer.load")({'rasi.vim'}, { ft = "rasi" }, _G.packer_plugins)]]
+time([[Defining lazy-load filetype autocommands]], false)
+vim.cmd("augroup END")
+vim.cmd [[augroup filetypedetect]]
+time([[Sourcing ftdetect script at: /home/m/.local/share/nvim/site/pack/packer/opt/rasi.vim/ftdetect/rasi.vim]], true)
+vim.cmd [[source /home/m/.local/share/nvim/site/pack/packer/opt/rasi.vim/ftdetect/rasi.vim]]
+time([[Sourcing ftdetect script at: /home/m/.local/share/nvim/site/pack/packer/opt/rasi.vim/ftdetect/rasi.vim]], false)
+vim.cmd("augroup END")
 if should_profile then save_profiles() end
 
 end)

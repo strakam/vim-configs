@@ -66,6 +66,10 @@ return packer.startup(function(use)
 
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate",}
+    use {
+        'Fymyte/rasi.vim',
+        ft = 'rasi',
+    }
 
     -- Toggleterm
     use "akinsho/toggleterm.nvim"
@@ -83,9 +87,9 @@ return packer.startup(function(use)
         requires = {'kyazdani42/nvim-web-devicons'}
     }
 
-
-    -- Colorschemes
+    -- Colors
     use 'christianchiarulli/nvcode-color-schemes.vim'
+    use {'norcalli/nvim-colorizer.lua', config="require'colorizer'.setup()"}
 
     -- Latex
     use 'lervag/vimtex'
